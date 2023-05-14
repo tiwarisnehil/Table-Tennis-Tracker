@@ -22,19 +22,15 @@ def main(args):
 
     os.mkdir("data/" + vidname)
     vid1_path = Path.joinpath(
-        Path(__file__).parents[0].resolve(), "videos/bsdk.mp4_1" +  "_1.mp4"
+        Path(__file__).parents[0].resolve(), "videos/" + vidname + "_1.mp4"
     )
     vid2_path = Path.joinpath(
-        Path(__file__).parents[0].resolve(), "videos/bsdk.mp4_1" + vidname + "_2.mp4"
+        Path(__file__).parents[0].resolve(), "videos/" + vidname + "_2.mp4"
     )
-
-    print(vid1_path)
-    print(vid2_path)
 
     # Select corners and net position
     cap1 = cv2.VideoCapture(str(vid1_path))
     _, frame = cap1.read()
-    print(frame)
     h1, _, c1 = frame.shape
 
     class CoordinateStore:
@@ -60,8 +56,7 @@ def main(args):
     print("Selected Coordinates: ")
     c1 = [[p[0], h1 - p[1], 1] for p in coordinateStore1.points]
     c1 = np.array(c1)
-    print("-----------------------------------------------")
-    print(coordinateStore1)
+    print(c1)
     cap1.release()
 
     cap2 = cv2.VideoCapture(str(vid2_path))
